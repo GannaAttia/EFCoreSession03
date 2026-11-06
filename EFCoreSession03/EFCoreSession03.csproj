@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Configrations\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,9 @@ namespace EFCoreSession03.Models
         public bool IsPublished { get; set; }
         public DateTime PublishededAt { get; set; }
 
+        public int InstructorId { get; set; }
+        public int CategoryId { get; set;
 
-    }
+
+        }
 }

@@ -143,14 +143,25 @@ namespace EFCoreSession03
 
                 }
             }
+            #region Create
+            //AddInstructor();
 
-            AddInstructor();
+            //AddCourse(1, 4);
 
-            AddCourse(1, 4);
+            //AddSeveralStudents();
 
-            AddSeveralStudents();
+            //EnrollStudent(1, 1);
+            #endregion
 
-            EnrollStudent(1, 1);
+            #region Read 
+            FindCourse(1, "ASP.NET Core Web API");
+
+            FilterCourses(400, 1200);
+
+            PrintSubCategories(1);
+
+            PrintCourseRoster(1);
+            #endregion 
 
         }
 

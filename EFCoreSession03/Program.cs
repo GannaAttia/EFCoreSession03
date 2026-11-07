@@ -496,7 +496,35 @@ namespace EFCoreSession03
                 Console.WriteLine("Course and its enrollment delsted successfully");
             }
         }
+        static void DeleteCategory(int categoryId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var category = context.Categories.Find(categoryId);
+                if (category == null)
+                {
+                    Console.WriteLine("Category not found ");
+                    return;
+                }
+                bool hasChildern = context.Categories
+                                            .Any(c => c.ParentCategoryId == categoryId);
+                if (hasChildern) {
+                    Console.WriteLine("Cannot delete category because it has sub Categories");
+                    return;
+                }
+                bool hasCourses = context.Courses
+                                        .Any(c => c.CategoryId == categoryId);
+                if (hasCourses) {
+                    Console.WriteLine("Cannot delete category because it has courses");
+                    return;
+                }
+                context.Categories.Remove(category);
+                context.SaveChanges();
+                Console.WriteLine("Category deleted Successfully");
+            }
+        }
         #endregion
+
 
 
     }

@@ -47,6 +47,42 @@ namespace EFCoreSession03.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Programming courses",
+                            Name = "Programming"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Backend development",
+                            Name = "Backend",
+                            ParentCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Frontend development",
+                            Name = "Frontend",
+                            ParentCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "ASP.NET development",
+                            Name = "ASP.NET",
+                            ParentCategoryId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Web design courses",
+                            Name = "Web Design",
+                            ParentCategoryId = 3
+                        });
                 });
 
             modelBuilder.Entity("EFCoreSession03.Models.Course", b =>
@@ -91,6 +127,78 @@ namespace EFCoreSession03.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "Learn C# basics",
+                            InstructorId = 1,
+                            IsPublished = true,
+                            Level = 0,
+                            Price = 500m,
+                            PublishededAt = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "C# Fundamentals"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 4,
+                            Description = "Build Web APIs using ASP.NET Core",
+                            InstructorId = 1,
+                            IsPublished = true,
+                            Level = 1,
+                            Price = 1200m,
+                            PublishededAt = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "ASP.NET Core Web API"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            Description = "Learn frontend basics",
+                            InstructorId = 2,
+                            IsPublished = true,
+                            Level = 0,
+                            Price = 400m,
+                            PublishededAt = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "HTML and CSS"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            Description = "Advanced JavaScript concepts",
+                            InstructorId = 2,
+                            IsPublished = false,
+                            Level = 2,
+                            Price = 900m,
+                            Title = "Advanced JavaScript"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 1,
+                            Description = "Software engineering principles",
+                            InstructorId = 3,
+                            IsPublished = true,
+                            Level = 1,
+                            Price = 750m,
+                            PublishededAt = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Software Engineering"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 2,
+                            Description = "Advanced backend concepts",
+                            InstructorId = 3,
+                            IsPublished = false,
+                            Level = 2,
+                            Price = 1500m,
+                            Title = "Advanced Backend Development"
+                        });
                 });
 
             modelBuilder.Entity("EFCoreSession03.Models.Enrollment", b =>
@@ -150,6 +258,32 @@ namespace EFCoreSession03.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instructors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "C# and Backend Instructor",
+                            Email = "ahmed@gmail.com",
+                            FullName = "Ahmed Mohamed",
+                            JoinAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "Frontend Developer and Instructor",
+                            Email = "sara@gmail.com",
+                            FullName = "Sara Ali",
+                            JoinAt = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Bio = "Software Engineering Instructor",
+                            Email = "omar@gmail.com",
+                            FullName = "Omar Hassan",
+                            JoinAt = new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("EFCoreSession03.Models.Student", b =>

@@ -18,6 +18,35 @@ namespace EFCoreSession03.Configrations
             builder.Property(i => i.Email).IsRequired().HasMaxLength(100);
             builder.Property(i => i.Bio).HasMaxLength(500);
             builder.Property(i => i.JoinAt).IsRequired();
+
+            #region Seed Data
+                builder.HasData(
+                        new Instructor
+                        {
+                            Id = 1,
+                            FullName = "Ahmed Mohamed",
+                            Email = "ahmed@gmail.com",
+                            Bio = "C# and Backend Instructor",
+                            JoinAt = new DateTime(2024, 1, 10)
+                        },
+                        new Instructor
+                        {
+                            Id = 2,
+                            FullName = "Sara Ali",
+                            Email = "sara@gmail.com",
+                            Bio = "Frontend Developer and Instructor",
+                            JoinAt = new DateTime(2024, 3, 15)
+                        },
+                        new Instructor
+                        {
+                            Id = 3,
+                            FullName = "Omar Hassan",
+                            Email = "omar@gmail.com",
+                            Bio = "Software Engineering Instructor",
+                            JoinAt = new DateTime(2024, 6, 20)
+                        }
+                    );
+            #endregion
         }
 
     }

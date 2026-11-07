@@ -154,7 +154,7 @@ namespace EFCoreSession03
 
         }
 
-        #region Read
+        #region Create 
         static void AddInstructor()
         {
             using (var context = new AppDBContext())
@@ -285,6 +285,9 @@ namespace EFCoreSession03
                 Console.WriteLine($"Student {student.FullName} enrolled in course {course.Title} successfully.");
             }
         }
+        #endregion
+        #region Read
+
         static void FindCourse(int courseId, string title)
         {
             using (var context = new AppDBContext())
@@ -345,6 +348,30 @@ namespace EFCoreSession03
                 foreach (var category in topCategories)
                 {
                     Console.WriteLine($"Category: {category.Name}");
+                }
+            }
+        }
+        static void PrintCourseRoster(int courseId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var course = context.Courses.Find(courseId);
+                if (course == null)
+                {
+                    Console.WriteLine("Course not found.");
+                    return;
+                }
+                var studentIds =context.Enrollments
+                                        .Where(c => c.CourseId == courseId)
+                                        .Select(c => c.StudentId)
+                                        .ToList();
+                Console.WriteLine($"Number of enrolled Students: {studentIds.Count}");
+                var students = context.Students
+                                    .Where(s => studentIds.Contains(s.Id))
+                                    .ToList();
+                foreach (var student in students)
+                {
+                    Console.WriteLine(student.FullName);
                 }
             }
         }

@@ -480,6 +480,22 @@ namespace EFCoreSession03
                 Console.WriteLine("Student deleted Successfully");
             }
         }
+        static void DeleteCourse(int courseId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var course = context.Courses.Find(courseId);
+                if (course == null)
+                {
+                    Console.WriteLine("Course Not Found0");
+                    return;
+                }
+
+                context.Courses.Remove(course);
+                context.SaveChanges();
+                Console.WriteLine("Course and its enrollment delsted successfully");
+            }
+        }
         #endregion
 
 

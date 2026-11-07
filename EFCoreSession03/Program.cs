@@ -545,6 +545,17 @@ namespace EFCoreSession03
 
             }
         }
+
+        static void BulkDeleteEnrollments()
+        {
+            using(var context = new AppDBContext())
+            {
+                int affectedRows = context.Enrollments
+                                        .Where( e => e.Status == EnrollmentStatus.Dropped)
+                                        .ExecuteDelete();
+                Console.WriteLine($"{affectedRows} enrollments deleted successfully");
+            }
+        }
         #endregion
 
 

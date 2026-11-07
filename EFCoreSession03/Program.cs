@@ -154,13 +154,13 @@ namespace EFCoreSession03
             #endregion
 
             #region Read 
-            FindCourse(1, "ASP.NET Core Web API");
+            //FindCourse(1, "ASP.NET Core Web API");
 
-            FilterCourses(400, 1200);
+            //FilterCourses(400, 1200);
 
-            PrintSubCategories(1);
+            //PrintSubCategories(1);
 
-            PrintCourseRoster(1);
+            //PrintCourseRoster(1);
             #endregion 
 
         }
@@ -384,6 +384,23 @@ namespace EFCoreSession03
                 {
                     Console.WriteLine(student.FullName);
                 }
+            }
+        }
+        #endregion
+        #region Update
+        static void UpdateCoursePrice(int courseId , decimal newPrice)
+        {
+            using (var context = new AppDBContext())
+            {
+                var course = context.Courses.Find(courseId);
+                if (course == null)
+                {
+                    Console.WriteLine("Course not Found");
+                    return;
+                }
+                course.Price = newPrice;
+                context.SaveChanges();
+                Console.WriteLine("Course Price Updated successfully");
             }
         }
         #endregion

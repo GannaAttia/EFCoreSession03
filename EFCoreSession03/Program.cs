@@ -403,6 +403,32 @@ namespace EFCoreSession03
                 Console.WriteLine("Course Price Updated successfully");
             }
         }
+        static void UpdateEnrollmentProgress(int studentId , int courseId , decimal newProgress)
+        {
+            using (var context = new AppDBContext())
+            {
+                var enrollment = context.Enrollments.Find(studentId , courseId);
+                if(enrollment == null)
+                {
+                    Console.WriteLine("Enrollment not found");
+                    return;
+                }
+                if(newProgress < 0 || newProgress > 100)
+                {
+                    Console.WriteLine("progress must be between 0 and 100");
+                    return;
+
+                }
+                enrollment.Progress = newProgress;
+                if(newProgress == 100)
+                {
+                    enrollment.Status = EnrollmentStatus.Completed;
+                }
+
+                context.SaveChanges();
+                Console.WriteLine("Enrollment progress Updated Successfully");
+            }
+        }
         #endregion
 
 

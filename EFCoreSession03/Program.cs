@@ -161,7 +161,15 @@ namespace EFCoreSession03
             //PrintSubCategories(1);
 
             //PrintCourseRoster(1);
-            #endregion 
+            #endregion
+
+            #region Update
+            UpdateCoursePrice(7, 1000);
+
+            UpdateEnrollmentProgress(1, 2, 100);
+
+            UpdateStudentEmail(6, "hana.new@gmail.com");
+            #endregion
 
         }
 

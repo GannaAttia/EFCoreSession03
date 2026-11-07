@@ -1,5 +1,6 @@
 ﻿using EFCoreSession03.Enums;
 using EFCoreSession03.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 
 namespace EFCoreSession03
@@ -530,7 +531,21 @@ namespace EFCoreSession03
             }
         }
         #endregion
+        #region Bulk Oper
+        static void BulkUpdateCourses()
+        {
+            using (var context = new AppDBContext())
+            {
+                int affectedRows = context.Courses
+                                            .Where(c => c.Price < 500)
+                                            .ExecuteUpdate(s => s.SetProperty(
+                                                c => c.Price , c => c.Price*1.10m
+                                                ));
+                Console.WriteLine($"{affectedRows} Courses Updated Successfully");
 
+            }
+        }
+        #endregion
 
 
     }

@@ -196,6 +196,40 @@ namespace EFCoreSession03
 
             }
         }
+        static void AddSeveralStudents()
+        {
+            using (var context = new AppDBContext())
+            {
+                var students = new List<Student>
+                {
 
+                    new Student
+                    {
+                        FullName = "Hana Ahmed",
+                        Email = "hana@gmail.com",
+                        DateOfBirth = new DateTime(2003, 4, 10)
+                    },
+                    new Student
+                    {
+                        FullName = "Youssef Ali",
+                        Email = "youssef@gmail.com",
+                        DateOfBirth = new DateTime(2002, 8, 15)
+                    },
+                    new Student
+                    {
+                        FullName = "Malak Mohamed",
+                        Email = "malak@gmail.com",
+                        DateOfBirth = new DateTime(2004, 1, 20)
+                    }
+
+                };
+                context.Students.AddRange(students);
+                context.SaveChanges();
+                foreach(var student in students)
+                {
+                    Console.WriteLine($"Student added :{student.FullName}, ID: {student.Id}");
+                }
+            }
+        }
     }
 }

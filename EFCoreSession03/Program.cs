@@ -178,6 +178,11 @@ namespace EFCoreSession03
 
             DeleteCategory(5);
             #endregion
+            #region Bulk Oper
+            BulkUpdateCourses();
+
+            BulkDeleteEnrollments();
+            #endregion
         }
 
         #region Create 

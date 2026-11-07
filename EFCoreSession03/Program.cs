@@ -170,7 +170,13 @@ namespace EFCoreSession03
 
             //UpdateStudentEmail(6, "hana.new@gmail.com");
             #endregion
+            #region Delete
+            DeleteStudent(6);
 
+            DeleteCourse(7);
+
+            DeleteCategory(5);
+            #endregion
         }
 
         #region Create 
@@ -493,7 +499,7 @@ namespace EFCoreSession03
 
                 context.Courses.Remove(course);
                 context.SaveChanges();
-                Console.WriteLine("Course and its enrollment delsted successfully");
+                Console.WriteLine("Course and its enrollment deleted successfully");
             }
         }
         static void DeleteCategory(int categoryId)

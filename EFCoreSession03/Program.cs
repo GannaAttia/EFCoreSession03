@@ -429,6 +429,23 @@ namespace EFCoreSession03
                 Console.WriteLine("Enrollment progress Updated Successfully");
             }
         }
+        static void UpdateStudentEmail (int studentId , string newEmail)
+        {
+            using (var context = new AppDBContext())
+            {
+                var student = context.Students.Find(studentId);
+                if(student == null)
+                {
+                    Console.WriteLine("Student not found");
+                    return;
+
+                }
+                student.Email = newEmail;
+                context.SaveChanges();
+                Console.WriteLine("Student Email Upadeted Successfully");
+            }
+        }
+
         #endregion
 
 

@@ -10,7 +10,7 @@ namespace EFCoreSession03
         {
             using (var context = new AppDBContext())
             {
-                if(!context.Students.Any())
+                if (!context.Students.Any())
                 {
                     var students = new List<Student>
                     {
@@ -154,7 +154,9 @@ namespace EFCoreSession03
 
         }
 
-        static void AddInstructor() {
+        #region Read
+        static void AddInstructor()
+        {
             using (var context = new AppDBContext())
             {
                 var instructor = new Instructor
@@ -168,9 +170,9 @@ namespace EFCoreSession03
                 context.SaveChanges();
                 Console.WriteLine($"Instructor Added Successfully ID:{instructor.Id}");
             }
-            
+
         }
-        static void AddCourse (int instructorId, int categoryId)
+        static void AddCourse(int instructorId, int categoryId)
         {
             using (var context = new AppDBContext())
             {
@@ -232,13 +234,13 @@ namespace EFCoreSession03
                 };
                 context.Students.AddRange(students);
                 context.SaveChanges();
-                foreach(var student in students)
+                foreach (var student in students)
                 {
                     Console.WriteLine($"Student added :{student.FullName}, ID: {student.Id}");
                 }
             }
         }
-        static void EnrollStudent(int studentId , int courseId)
+        static void EnrollStudent(int studentId, int courseId)
         {
             using (var context = new AppDBContext())
             {
@@ -259,10 +261,10 @@ namespace EFCoreSession03
                 if (!course.IsPublished)
                 {
                     Console.WriteLine("Course is not published.");
-                    return; 
+                    return;
                 }
                 var existingEnrollment = context.Enrollments.
-                    Find(studentId, courseId);  
+                    Find(studentId, courseId);
                 if (existingEnrollment != null)
                 {
                     Console.WriteLine("Student Already enrolled in this course");
@@ -283,5 +285,37 @@ namespace EFCoreSession03
                 Console.WriteLine($"Student {student.FullName} enrolled in course {course.Title} successfully.");
             }
         }
+        static void FindCourse(int courseId, string title)
+        {
+            using (var context = new AppDBContext())
+            {
+                var courseById = context.Courses.Find(courseId);
+
+                if (courseById != null)
+                {
+                    Console.WriteLine($"Found by ID: {courseById.Title}");
+                }
+                else
+                {
+                    Console.WriteLine("Course not found by ID");
+                }
+
+                var courseByTitle = context.Courses.FirstOrDefault(c => c.Title == title);
+
+                if (courseByTitle != null)
+                {
+                    Console.WriteLine($"Found by Title: {courseByTitle.Title}");
+                }
+                else
+                {
+                    Console.WriteLine("Course not found by Title");
+                }
+            }
+        }
+        #endregion
+
+
     }
+
 }
+

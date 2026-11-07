@@ -144,7 +144,14 @@ namespace EFCoreSession03
                 }
             }
 
-            
+            AddInstructor();
+
+            AddCourse(1, 4);
+
+            AddSeveralStudents();
+
+            EnrollStudent(1, 1);
+
         }
 
         static void AddInstructor() {
@@ -229,6 +236,51 @@ namespace EFCoreSession03
                 {
                     Console.WriteLine($"Student added :{student.FullName}, ID: {student.Id}");
                 }
+            }
+        }
+        static void EnrollStudent(int studentId , int courseId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var student = context.Students.Find(studentId);
+                if (student == null)
+                {
+                    Console.WriteLine("Student not found.");
+                    return;
+                }
+
+                var course = context.Courses.Find(courseId);
+                if (course == null)
+                {
+                    Console.WriteLine("Course not found.");
+                    return;
+                }
+
+                if (!course.IsPublished)
+                {
+                    Console.WriteLine("Course is not published.");
+                    return; 
+                }
+                var existingEnrollment = context.Enrollments.
+                    Find(studentId, courseId);  
+                if (existingEnrollment != null)
+                {
+                    Console.WriteLine("Student Already enrolled in this course");
+                    return;
+                }
+
+                var enrollment = new Enrollment
+                {
+                    StudentId = studentId,
+                    CourseId = courseId,
+                    EnrollmentDate = DateTime.Now,
+                    Progress = 0,
+                    Status = EnrollmentStatus.Active,
+                    FinalGarde = null
+                };
+                context.Enrollments.Add(enrollment);
+                context.SaveChanges();
+                Console.WriteLine($"Student {student.FullName} enrolled in course {course.Title} successfully.");
             }
         }
     }

@@ -163,7 +163,39 @@ namespace EFCoreSession03
             }
             
         }
+        static void AddCourse (int instructorId, int categoryId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var instructor = context.Instructors.Find(instructorId);
+                var category = context.Categories.Find(categoryId);
+                if (instructor == null)
+                {
+                    Console.WriteLine("Instructor not found.");
+                    return;
+                }
+                if (category == null)
+                {
+                    Console.WriteLine("Category not found.");
+                    return;
+                }
+                var course = new Course
+                {
+                    Title = "Entity Framework Core",
+                    Description = "Learn EF Core with C#",
+                    Price = 800,
+                    Level = CourseLevel.Intermediate,
+                    IsPublished = false,
+                    PublishededAt = null,
+                    InstructorId = instructorId,
+                    CategoryId = categoryId
+                };
+                context.Courses.Add(course);
+                context.SaveChanges();
+                Console.WriteLine($"Course Added Successfully ID:{course.Id}");
 
+            }
+        }
 
     }
 }

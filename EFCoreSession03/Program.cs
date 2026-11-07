@@ -312,6 +312,20 @@ namespace EFCoreSession03
                 }
             }
         }
+        static void FilterCourses(decimal minPrice , decimal maxPrice)
+        {
+            using (var context = new AppDBContext())
+            {
+                var courses = context.Courses
+                                   .Where(c => c.Price >= minPrice && c.Price <= maxPrice)
+                                   .OrderByDescending(c => c.Price)
+                                   .ToList();
+                foreach (var course in courses)
+                {
+                    Console.WriteLine($"Course: {course.Title}, {course.Level},Price: {course.Price}");
+                }
+            }
+        }
         #endregion
 
 

@@ -164,11 +164,11 @@ namespace EFCoreSession03
             #endregion
 
             #region Update
-            UpdateCoursePrice(7, 1000);
+            //UpdateCoursePrice(7, 1000);
 
-            UpdateEnrollmentProgress(1, 2, 100);
+            //UpdateEnrollmentProgress(1, 2, 100);
 
-            UpdateStudentEmail(6, "hana.new@gmail.com");
+            //UpdateStudentEmail(6, "hana.new@gmail.com");
             #endregion
 
         }
@@ -454,6 +454,32 @@ namespace EFCoreSession03
             }
         }
 
+        #endregion
+        #region Delete
+        static void DeleteStudent(int studentId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var student = context.Students.Find(studentId);
+                if(student == null)
+                {
+                    Console.WriteLine("Student not found");
+                    return;
+                }
+                bool hasEnrollments = context.Enrollments
+                                            .Any(e => e.StudentId == studentId);
+                if (hasEnrollments)
+                {
+                    Console.WriteLine("Cannot delete student because they have enrollments");
+                    return;
+
+                }
+                context.Students.Remove(student);
+                context.SaveChanges();
+
+                Console.WriteLine("Student deleted Successfully");
+            }
+        }
         #endregion
 
 

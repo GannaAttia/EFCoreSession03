@@ -326,6 +326,28 @@ namespace EFCoreSession03
                 }
             }
         }
+        static void PrintSubCategories(int categoryId)
+        {
+            using (var context = new AppDBContext())
+            {
+                var subCategories = context.Categories
+                                            .Where(c => c.ParentCategoryId == categoryId)
+                                            .ToList();
+                Console.WriteLine("Sub Categories: ");
+                foreach (var category in subCategories)
+                {
+                    Console.WriteLine($"Category: {category.Name}");
+                }
+                var topCategories = context.Categories
+                                            .Where(c => c.ParentCategoryId == null)
+                                            .ToList();
+                Console.WriteLine("Top Level Categories: ");
+                foreach (var category in topCategories)
+                {
+                    Console.WriteLine($"Category: {category.Name}");
+                }
+            }
+        }
         #endregion
 
 
